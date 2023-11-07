@@ -127,3 +127,42 @@ CatModel.find({firstname: "Clark Kent"}, (err, docs) =>{
     console.log(docs);
 })
 ```
+
+<br>
+<br>
+
+# Upload object in AWS S3 bucket
+
+```javascript
+//npm install aws-sdk
+const AWS = require('aws-sdk');
+const fs = require('fs');
+
+
+
+
+// Set up AWS configuration
+AWS.config.update({
+  accessKeyId: 'AKIAUYPP6YV4XQS665GF',
+  secretAccessKey: '9TND7wbQ8GCMeAFSOvPNrz0+k1gGdrZHJ2IHMizT',
+  region: 'ap-south-1' // Change to your AWS region
+});
+
+// Initialize S3
+const s3 = new AWS.S3();
+
+s3.putObject(
+  {
+    Body: "hello worldsssss", // what the file should contain : a string 
+    Bucket: 'knigiimagedb', //s3 bucket name
+    Key: "myfile.txt" // specify the name of the file , the file will take place with this name in cloud
+  },
+  (err, data) => {
+    if (err) {
+      console.error("Error uploading file: ", err);
+    } else {
+      console.log("File uploaded successfully!");
+    }
+  }
+);
+```
