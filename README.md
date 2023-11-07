@@ -199,6 +199,8 @@ s3.getObject(
     if( err ) {
       console.log( err );
     } else {
+      // result give an object which have a property containing
+      // buffered data which needs to be converted in specific file.
       console.log(result.Body.toString('utf-8'))
     }
   }
