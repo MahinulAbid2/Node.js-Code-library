@@ -257,3 +257,31 @@ s3.deleteObject(params, (err, res) => {
 
 
 ```
+
+
+<br>
+<br>
+
+# delete object from AWS S3 bucket
+
+
+```javascript
+const axios = require('axios');
+
+//error log: not uing "https://" in this cloudFrontDistributionDomain caused an error
+// unable to get image since I didn't use "https://" in the variable
+const cloudFrontDistributionDomain = 'https://d19a566nyr3opx.cloudfront.net';
+const objectKey = 'image.jpg';
+const apiUrl = cloudFrontDistributionDomain + "/" + objectKey;
+
+
+axios.get(apiUrl)
+  .then(function (response) {
+    // Handle a successful response
+    console.log('Response data:', response.data);
+  })
+  .catch(function (error) {
+    // Handle any errors that occurred during the request
+    console.error('Error:', error);
+  });   
+```
