@@ -322,3 +322,25 @@ axios.get(apiUrl)
     console.error('Error:', error);
   }); 
 ```
+
+
+<br>
+<br>
+
+# slow process of reading image data from axios get reuqest and send it as response
+```javascript
+const fs = require('fs');
+
+axios.get(apiUrl, { responseType: 'arraybuffer' })
+  .then(function (response) {
+    const binaryData = response.data;
+    
+    // Save the binary image data to a file (example: image.jpg)
+    const imagePath = 'path_to_save_image.jpg'; // Replace with the desired file path
+    fs.writeFileSync(imagePath, Buffer.from(binaryData), 'binary');
+  })
+  .catch(function (error) {
+    console.error('Error:', error);
+  });
+
+```
