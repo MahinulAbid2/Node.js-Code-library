@@ -262,7 +262,7 @@ s3.deleteObject(params, (err, res) => {
 <br>
 <br>
 
-# delete object from AWS S3 bucket
+# get Object using Axios from AWS cloudFront
 
 
 ```javascript
@@ -284,4 +284,20 @@ axios.get(apiUrl)
     // Handle any errors that occurred during the request
     console.error('Error:', error);
   });   
+```
+
+<br>
+<br>
+
+# Check if the data is binary(image data) or not 
+
+
+```javascript
+for (let i = 0; i < data.length; i++) {
+      const charCode = data.charCodeAt(i);
+      if (charCode < 32 || charCode > 127) {
+        console.log("\n this data is binary \n");
+        return true;
+      }
+    }
 ```
