@@ -206,3 +206,54 @@ s3.getObject(
   }
 )
 ```
+
+
+<br>
+<br>
+
+# delete object from AWS S3 bucket
+```javascript
+const axios = require('axios');
+const express = require('express');
+const app = express();
+const fs = require('fs');
+const x = require("./func");
+const AWS = require( 'aws-sdk' );
+
+// const cloudFrontDistributionDomain = 'd19a566nyr3opx.cloudfront.net';
+// const objectKey = 'image.jpg';
+
+
+
+AWS.config.update({
+  accessKeyId: 'AKIAUYPP6YV4XQS665GF',
+  secretAccessKey: '9TND7wbQ8GCMeAFSOvPNrz0+k1gGdrZHJ2IHMizT',
+  region: 'ap-south-1' ,// Change to your AWS region  
+
+});
+
+
+//initialize s3
+// it must be after AWS.config
+const s3 = new AWS.S3({apiVersion: 'latest'}); // s3 must initialize after AWS.config
+const params = {
+  Bucket : 'knigiimagedb',
+  Key: 'nicetext.txt',
+ 
+}
+
+
+// confirm IAM user has AmazonS3FullAccess policy added
+s3.deleteObject(params, (err, res) => {
+  console.log(" \n beginning operation \n"); 
+  // console.log(s3.config.credentials);
+  if(err) {
+    console.log(err);
+  } 
+  else {
+    console.log("successful");
+  }
+})
+
+
+```
