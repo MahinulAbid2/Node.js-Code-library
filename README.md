@@ -301,3 +301,24 @@ for (let i = 0; i < data.length; i++) {
       }
     }
 ```
+
+```javascript
+axios.get(apiUrl)
+  .then(function (response) {
+    const data = response.data;
+    // Handle a successful response
+    // console.log('Response data:', response.data);
+    // console.log(Buffer.isBuffer(response.data));
+    for (let i = 0; i < data.length; i++) {
+      const charCode = data.charCodeAt(i);
+      if (charCode < 32 || charCode > 127) {
+        console.log("\n this data is binary \n");
+        return true;
+      }
+    }
+  })
+  .catch(function (error) {
+    // Handle any errors that occurred during the request
+    console.error('Error:', error);
+  }); 
+```
