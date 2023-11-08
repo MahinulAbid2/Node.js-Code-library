@@ -344,3 +344,46 @@ axios.get(apiUrl, { responseType: 'arraybuffer' })
   });
 
 ```
+
+
+
+
+<br>
+<br>
+
+# Read image data from AWS bucket using cloudFront and using AXIOS
+
+```javascript
+const axios = require('axios');
+const express = require('express');
+const app = express();
+
+//error log: not uing https:// in this cloudFrontDistributionDomain caused an error
+// unable to get image since I didn't use "https://" in the variable
+const cloudFrontDistributionDomain = 'https://d19a566nyr3opx.cloudfront.net';
+const objectKey = 'image.jpg';
+const apiUrl = cloudFrontDistributionDomain + "/" + objectKey;
+
+app.get('/' , ( req, res) => {
+  res.send(`<img src="/image"/>`)
+})
+
+
+app.get('/image' , ( req, res ) => {
+  axios.get(apiUrl, {responseType: 'arraybuffer'})
+  .then(function (response) {
+
+    res.send(response.data)
+
+  })
+  .catch(function (error) {
+    // Handle any errors that occurred during the request
+    console.error('Error:', error);
+    
+  });   
+
+
+})
+
+app.listen(8000);
+```
