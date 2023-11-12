@@ -437,6 +437,40 @@ b()
 
 ```
 
+<br>
+<br>
+
+# Setting up route as module in different file(express.js)
+
+```javascript
+//MAIN FILE: index.js
+const express = require( 'express' );
+const mongoose = require ( 'mongoose' );
+const app = express();
+
+
+
+module.exports = app;
+require('./src/routes/userRoutes');
+```
+
+```javascript
+//ROUTE FILE: routeHandler.js
+const app = require("../../index");
+
+app.get("/", ( req,res ) => {
+    res.send("this is index page")
+})
+
+app.listen(8000);
+```
+
+
+
+
+
+
+
 
 
 
