@@ -387,3 +387,77 @@ app.get('/image' , ( req, res ) => {
 
 app.listen(8000);
 ```
+
+
+
+# Structure of find() operation
+* find() no longer supports callback.
+* `find(criteria, condition, callback)`, it no longer supports the callback.
+* It used callback to create asyncnonous function before.
+* Now it is using promise to create asyncronous function.
+* That's why it no longer supports callback.
+* `find(criteria, condition)`.
+* Now what could be behind the structure of the find()?
+
+
+
+```javascript
+class Mongoose {
+    find(criteria, condition, otherArgument) {
+        return new Promise( ( resolve, reject ) => {
+            // produce promise depending on criteria
+        } 
+    }
+}
+
+
+// time to catch the promise using "async"
+const b = async () => {
+    try {
+        let m =await ShopModel.find(
+            {
+                productTitle: "Woven Issue Four"
+            }  
+        )
+        return m;
+    }
+    
+    catch (error) {
+        console.log(error);
+    }
+}
+
+b()
+.then( ( res ) => {
+    console.log(res);
+})
+.catch( ( err ) => {
+    console.log(err);
+})
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
