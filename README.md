@@ -465,8 +465,45 @@ app.get("/", ( req,res ) => {
 app.listen(8000);
 ```
 
+<br>
+<br>
+<br>
 
+# reading image from client request and upload file to amazon aws s3 using mutler(expres middleware)
 
+```javascript
+app 
+    .post('/api/v1/uploadImage', upload.single('test') ,async ( req, res ) => {
+        try{
+            let a = await req.file.filename;
+        }
+
+        catch (err ) {
+            console.log(err)
+        }
+        
+        console.log(req.file.filename); //returns object containing uploaded file
+        // res.send(req.file);
+
+        const x =fs.readFileSync(`${__dirname}/../../upload/${req.file.filename}`);
+        s3.putObject({
+            Body : x,
+            Bucket : 'knigiimagedb',
+            Key : `shopItem/${req.file.filename}.jpg`
+        },
+        ( err, data ) => {
+            if(err) {
+                console.log(err)
+            }else {
+                console.log("File Uploaded successful")
+            }
+        }
+        ) // end of s3
+
+        res.send("file uploaded")
+    })
+
+```
 
 
 
